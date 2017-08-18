@@ -1,10 +1,9 @@
 {
-  "name": "note-server",
+  "name": "note-client",
   "version": "1.0.0",
-  "description": "express+mongoDB server for note SPA",
-  "main": "app.js",
+  "description": "react client for note SPA ",
+  "main": "index.js",
   "scripts": {
-	"start": "babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,18 +11,13 @@
     "url": "git+https://github.com/dydaev/node-mongo-react.git"
   },
   "keywords": [
-    "express",
-    "node",
-    "mongoDB"
+    "react",
+    "SPA"
   ],
   "author": "romaChe",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dydaev/node-mongo-react/issues"
   },
-  "homepage": "https://github.com/dydaev/node-mongo-react#readme",
-  "dependencies": {
-    "express": "^4.15.4",
-    "mongoose": "^4.11.7"
-  }
+  "homepage": "https://github.com/dydaev/node-mongo-react#readme"
 }
