@@ -1,7 +1,13 @@
 import React from 'react';
 
-const NoteEditor = props => {(
-	<h1>Notes editor</h1>
+import NoteForm from './create-form.jsx';
+
+const NoteEditor = props => {
+		return (
+			<article>
+				<h1>Notes editor</h1>
+				<NoteForm />
+			</article>
 )}
 
 export default NoteEditor;
