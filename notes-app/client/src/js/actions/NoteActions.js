@@ -4,7 +4,7 @@ import Const from '../const/AppConstants';
 import api from '../api';
 
 const NoteActions = {
-	loadNotes() {
+	loadNotes: function() {
 		AppDispatcher.dispatch({
 				type: Const.LOAD_NOTES_REQUEST
 		});
@@ -21,7 +21,7 @@ const NoteActions = {
 						error: err
 					}));
 	},
-	createNote(note) {
+	createNote: function(note) {
 		api.createNote(note)
 				.then(() => {
 					this.loadNotes()
@@ -30,7 +30,7 @@ const NoteActions = {
 					console.log("Failed create note:", err);
 				});
 	},
-	deleteNote(noteId) {
+	deleteNote: function(noteId) {
 		api.deleteNote(noteId)
 				.then(() => {
 					this.loadNotes();
@@ -40,3 +40,4 @@ const NoteActions = {
 				});
 	}
 };
+export default NoteActions;

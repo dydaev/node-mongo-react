@@ -18,7 +18,6 @@ function formatNote(note) {
 		createdAt: note.createdAt
 	};
 }
-
 const TaskStore = Object.assign({}, EventEmitter.prototype, {
 	isLoading() {
 		return _isLoading;
@@ -37,7 +36,7 @@ const TaskStore = Object.assign({}, EventEmitter.prototype, {
 	},
 
 	removeChangeListner(callback) {
-		this.removeListner(CHANGE_EVENT, callback);
+		this.removeListener(CHANGE_EVENT, callback);
 	}
 });
 

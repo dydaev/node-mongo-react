@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ReactCreateClass from 'create-react-class';
 
 import NoteStore from './stores/noteStore.js';
 import NotesActions from './actions/NoteActions.js';
@@ -9,36 +10,35 @@ import NotesGrid from './components/notes-grid.jsx'
 function getStateFromFlux() {
 	return {
 		isLoading: NoteStore.isLoading(),
-		notes: NoteStore.setNotes()
+		notes: NoteStore.getNotes()
 	};
 }
-
-class App extends Component
-{
-	constructor(props){
-		super(props);
-	}
+const App = ReactCreateClass({
 
 	getInitialState() {
 		return getStateFromFlux();
-	}
+	},
 
 	componentWillMount() {
 		NotesActions.loadNotes();
-	}
+	},
 
 	componentDidMount() {
 		NoteStore.addChangeListner(this._onChange);
-	}
+	},
 
 	componentWillUnmount() {
 		NoteStore.removeChangeListner(this._onChange);
-	}
+	},
 	
 	handleNoteAdd(data) {
 		NotesActions.createNote(data);
-	}
-	
+	},
+
+	_onChange() {
+        this.setState(getStateFromFlux());
+    },
+
 	render() {
 		return(
 			<section>
@@ -47,6 +47,7 @@ class App extends Component
 				<NotesGrid />
 			</section>
 	)}
-}
+
+});
 
 export default App;
