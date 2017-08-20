@@ -35,11 +35,15 @@ class App extends Component
 		NoteStore.removeChangeListner(this._onChange);
 	}
 	
+	handleNoteAdd(data) {
+		NotesActions.createNote(data);
+	}
+	
 	render() {
 		return(
 			<section>
 				<h1>Notes</h1>
-				<NoteEditor />
+				<NoteEditor onNoteAdd={this.handleNoteAdd} />
 				<NotesGrid />
 			</section>
 	)}

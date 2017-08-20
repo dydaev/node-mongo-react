@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import Const form '../const/AppConstants';
+import Const from '../const/AppConstants';
 
 import api from '../api';
 
