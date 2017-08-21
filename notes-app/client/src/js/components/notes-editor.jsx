@@ -5,13 +5,13 @@ const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
 	let colorInput = '';
 	let textArea = '';
 	
-	const onChangeInput = e => {
+/*	const onChangeInput = e => {
 		const element = eval(e.target.id)
 		element.value = element.value
-	}
+	}*/
 
 	const handleSubmit = () => {
-		console.log("push to state. {", titleInput.value + "-" + colorInput.value + "-" + textArea.value ,"}")
+		//console.log("push to state. {", titleInput.value + "-" + colorInput.value + "-" + textArea.value ,"}")
 		onNoteAdd({
 			title: titleInput.value,
 			color: colorInput.value,
@@ -23,7 +23,7 @@ const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
 		<div>
 			<input
 				id="titleInput"
-				onChange={onChangeInput}
+				
 				ref={input => titleInput = input} 
 				type="text" 
 				name="title" 
@@ -32,7 +32,7 @@ const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
 			/>
 			<input
 				id="colorInput"
-				onChange={onChangeInput}
+				
 				ref={input => colorInput = input} 
 				type="text" 
 				name="color" 
@@ -41,7 +41,7 @@ const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
 			/>
 			<textarea
 				id="textArea"
-				onChange={onChangeInput}
+				
 				ref={area => textArea = area} 
 				cols="30" 
 				name="text" 

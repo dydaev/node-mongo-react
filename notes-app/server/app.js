@@ -2,15 +2,18 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-
+import cors from 'cors';
 import * as db from './utils/dbUtils';
 
 db.setUpConnection();
 
 const app = express();
-const port = 7000;
+const port = require('../etc/config.json').serverPort;
 
 app.use( bodyParser.json() );
+
+// Allow requests from any origin
+app.use(cors({ origin: '*' }));
 
 app.get('/notes', (req, res) => {
 	db.listNotes()

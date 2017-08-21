@@ -4,7 +4,7 @@
   "description": "express+mongoDB server for note SPA",
   "main": "app.js",
   "scripts": {
-	"start": "babel-node app.js",
+    "start": "babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/dydaev/node-mongo-react#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "mongoose": "^4.11.7"
   }
