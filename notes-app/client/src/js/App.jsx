@@ -7,6 +7,7 @@ import NotesActions from './actions/NoteActions.js';
 import NoteEditor from './components/notes-editor.jsx'
 import NotesGrid from './components/notes-grid.jsx'
 
+
 function getStateFromFlux() {
 	return {
 		isLoading: NoteStore.isLoading(),

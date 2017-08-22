@@ -20,7 +20,7 @@ const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
 	}
 
 	return (
-		<div>
+		<div className="note-thumbnail">
 			<input
 				id="titleInput"
 				
