@@ -1,56 +1,104 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-const NoteEditor = ({ onNoteAdd, title='', text='', color="#FFFFFF" }) => {
-	let titleInput = '';//must be equal id tag for working method onChangeInput
-	let colorInput = '';
-	let textArea = '';
-	
-/*	const onChangeInput = e => {
-		const element = eval(e.target.id)
-		element.value = element.value
-	}*/
+import Paper from 'material-ui/Paper';
+import { ChromePicker } from 'react-color';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
-	const handleSubmit = () => {
-		//console.log("push to state. {", titleInput.value + "-" + colorInput.value + "-" + textArea.value ,"}")
-		onNoteAdd({
-			title: titleInput.value,
-			color: colorInput.value,
-			text: textArea.value
-		})
+
+class NoteEditor extends PureComponent
+{
+	constructor(props) {
+		super(props);
+		this.state = {
+			displayColorPicker: false,
+			title: props.title,
+			text: props.text,
+			color: props.color || '#FFFFFF'
+		}
 	}
 
-	return (
-		<div className="note-thumbnail">
-			<input
-				id="titleInput"
-				
-				ref={input => titleInput = input} 
-				type="text" 
-				name="title" 
-				placeholder="Title" 
-				size="30"
-			/>
-			<input
-				id="colorInput"
-				
-				ref={input => colorInput = input} 
-				type="text" 
-				name="color" 
-				placeholder="color" 
-				size="10"
-			/>
-			<textarea
-				id="textArea"
-				
-				ref={area => textArea = area} 
-				cols="30" 
-				name="text" 
-				rows="3" 
-				placeholder="text">
-			</textarea>
-			
-			<input type="submit" onClick={handleSubmit} value="Sent"/>
-		</div>
-)}
+	handleClickPicker() {
+    	this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  	}
+  	handleClosePicker() {
+    	this.setState({ displayColorPicker: false })
+  	}
+	handleChangeColor(newColor) {
+		this.setState({ color: newColor.hex });
+	}
+
+	handleSubmit() {
+		//console.log("push to state. {", titleInput.value + "-" + colorInput.value + "-" + textArea.value ,"}")
+/*		onNoteAdd({
+			title: document.querySelector("#titleInput").value,
+			color: document.querySelector("#").value,
+			text: document.querySelector("#textArea").value
+		})*/
+		alert("Saving... title:" + document.querySelector("#titleInput").value )
+	}
+	render() {
+		const buttonStile = {
+			marginRight: 10,
+			marginTop: 1
+		}
+		const textItemStyle = {
+			width: 200,
+			color: "#ff4444"
+		}
+		const stylePaper = {
+		 	height: 220,
+			width: 240,
+			margin: 20,
+			textAlign: 'center',
+			display: 'inline-block'
+		}
+		const popover = {
+	      position: 'absolute',
+	      zIndex: '2',
+	    }
+	    const cover = {
+	      position: 'fixed',
+	      top: '0px',
+	      right: '0px',
+	      bottom: '0px',
+	      left: '0px',
+	    }
+		return (
+			<div className="note-thumbnail">
+			<Paper 
+				style={ Object.assign({backgroundColor:this.state.color}, stylePaper )}
+				zDepth={2} 
+				rounded={false} 
+			>	
+				<TextField
+					id="titleInput"
+					style={textItemStyle}
+	      			hintText="Title"
+	      			value={this.state.title}
+	    		/>
+	    		<TextField
+					id="textArea"
+					style={textItemStyle}
+			     	hintText="Text"
+			     	multiLine={true}
+			     	rows={4}
+			     	rowsMax={4}
+			     	value={this.state.text}
+			    />
+				<RaisedButton style={ buttonStile } label="Color" onClick={ this.handleClickPicker.bind(this) }/>
+			    
+		        { this.state.displayColorPicker ? 
+		        	<div style={ popover }>
+		          		<div style={ cover } onClick={ this.handleClosePicker.bind(this) }/>
+		          		<ChromePicker  onChange={this.handleChangeColor.bind(this)} color={this.state.color} />
+		        	</div> 
+		        	: null }
+
+				<RaisedButton label="Save" onClick={this.handleSubmit.bind(this)}/>
+			</Paper>			
+			</div>
+		)}
+}
 
 export default NoteEditor;

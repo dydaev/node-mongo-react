@@ -50,7 +50,7 @@ AppDispatcher.register(action => {
 		}
 		case AppConst.LOAD_NOTES_SUCCESS: {
 			_isLoading = false;
-			_note = action.notes.map ( formatNote );
+			_notes = action.notes.map( formatNote );
 			_loadingError = null;
 
 			TaskStore.emitChange();

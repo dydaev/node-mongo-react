@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactCreateClass from 'create-react-class';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import NoteStore from './stores/noteStore.js';
 import NotesActions from './actions/NoteActions.js';
@@ -42,11 +43,13 @@ const App = ReactCreateClass({
 
 	render() {
 		return(
+				<MuiThemeProvider>
 			<section>
-				<h1>Notes</h1>
-				<NoteEditor onNoteAdd={this.handleNoteAdd} />
-				<NotesGrid />
+					<h1>Notes</h1>
+					<NoteEditor onNoteAdd={this.handleNoteAdd} />
+					<NotesGrid notes={this.state.notes} />
 			</section>
+				</MuiThemeProvider>
 	)}
 
 });
