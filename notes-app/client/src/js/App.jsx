@@ -37,6 +37,16 @@ const App = ReactCreateClass({
 		NotesActions.createNote(data);
 	},
 
+	handleNoteDelete( id ) {
+		console.log("deleting note id: ", id)
+
+		NotesActions.deleteNote(id);
+	},
+
+	hamdleNoteEdit (data) {
+
+	},
+
 	_onChange() {
         this.setState(getStateFromFlux());
     },
@@ -44,11 +54,17 @@ const App = ReactCreateClass({
 	render() {
 		return(
 				<MuiThemeProvider>
-			<section>
-					<h1>Notes</h1>
-					<NoteEditor onNoteAdd={this.handleNoteAdd} />
-					<NotesGrid notes={this.state.notes} />
-			</section>
+					<section>
+							<h1>Notes</h1>
+							<article id="notes">
+								<NotesGrid
+									notes={this.state.notes}  
+									onNoteAdd={this.handleNoteAdd}
+									onNoteEdit={this.hamdleNoteEdit}
+									onNoteDelete={this.handleNoteDelete} 
+								/>
+							</article>
+					</section>
 				</MuiThemeProvider>
 	)}
 

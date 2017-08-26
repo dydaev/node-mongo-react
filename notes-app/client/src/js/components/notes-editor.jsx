@@ -19,12 +19,14 @@ class NoteEditor extends PureComponent
 {
 	constructor(props) {
 		super(props);
+		console.log("note-", this)
 		this.state = {
+			id: props.id,
 			displayColorPicker: false,
-			title: props.title || '',
-			text: props.text || '',
+			title: props.title || undefined,
+			text: props.text || undefined,
 			color: props.color || '#FFFFFF',
-			isChanged: false
+			isChanged: (props.title && props.text) ? false : true
 		}
 	}
 
@@ -42,44 +44,48 @@ class NoteEditor extends PureComponent
 	}
 	handleCahgeTextField(e) {
 		this.setState({ 
-			[e.target.id]: e.target.value,
+			[e.target.id]: e.target.value === '' ? undefined : e.target.value ,
 			isChanged: true
 		 })
 	}
 	handleCancle() {
 		this.setState({
 			color: this.props.color || '#FFFFFF',
-			text: this.props.text,
-			title: this.props.title,
+			text: this.props.text || undefined,
+			title: this.props.title || undefined,
 			isChanged: false
 		})
+	}
+	handleDeleteNote(e) {
+		this.props.onNoteDelete(this.props.id)
 	}
 	handleChanging() {
 		this.setState({ isChanged: true })
 	}
 	handleSubmit(e) {
 		this.setState({ isChanged: false })
-/*		onNoteAdd({
+		this.props.onNoteAdd({
 			title: this.state.title,
 			color: this.state.color,
 			text: this.state.text
-		})*/
-		alert("Saving... title: " + this.state.title + " & text: " + this.state.text )
+		})
+		if (this.props.onCloseNewNoteEditor !== undefined) {
+			this.props.onCloseNewNoteEditor();
+		}
+		// alert("Saving... title: " + this.state.title + " & text: " + this.state.text )
 	}
 	render() {
 		const buttonStile = {
-			width: 60,
-    		height: 60,
+			width: 40,
+    		height: 40,
 			marginRight: 10,
-			padding: 10,
-			marginTop: -2
 		}
 		const textItemStyle = {
 			width: 200,
 			color: "#ff4444"
 		}
 		const stylePaper = {
-		 	height: 220,
+		 	height: 230,
 			width: 240,
 			margin: 20,
 			textAlign: 'center',
@@ -114,6 +120,7 @@ class NoteEditor extends PureComponent
 					<IconButton 
 						label="Save" 
 						style={ buttonStile } 
+						disabled={this.state.text  === this.props.text && this.state.title === this.props.title}
 						onClick={this.handleSubmit.bind(this)}>
 						<ContentCheck />
 					</IconButton>
@@ -133,7 +140,8 @@ class NoteEditor extends PureComponent
 					<ActionEdit />
 				</IconButton>
 	    		<IconButton 
-					label="Delete">
+					label="Delete"
+					onClick={this.handleDeleteNote.bind(this)}>
 					<ActionDelete />
 				</IconButton>
 	    	</div>
@@ -145,7 +153,6 @@ class NoteEditor extends PureComponent
 	    	: noteButtons
 
 		return (
-			<div className="note-thumbnail">
 			<Paper 
 				style={ Object.assign({backgroundColor:this.state.color}, stylePaper )}
 				zDepth={2} 
@@ -173,7 +180,6 @@ class NoteEditor extends PureComponent
 
 			    {Buttons}
 			</Paper>			
-			</div>
 		)}
 }
 
