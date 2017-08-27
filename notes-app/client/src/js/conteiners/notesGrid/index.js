@@ -7,7 +7,6 @@ class NotesGrid extends PureComponent
 {
 	constructor(props) {
 		super(props);
-		console.log("super-props:", props)
 		this.state = {
 			notes: props.notes,
 			onNoteAdd: props.onNoteAdd,
@@ -15,6 +14,16 @@ class NotesGrid extends PureComponent
 			onNoteDelete: props.onNoteDelete,
 			isAddNote: false
 		}
+	}
+	shouldComponentUpdate(nextProps, nextState){
+		return nextProps.notes !== this.props.notes || nextState !== this.state.isAddNote
+	}
+	componentWillReceiveProps(nextProps){
+		this.setState({notes: nextProps.notes,
+			onNoteAdd: this.state.onNoteAdd,
+			onNoteEdit: this.state.onNoteEdit,
+			onNoteDelete: this.state.onNoteDelete,
+			isAddNote: this.state.isAddNote})
 	}
 	getNoteEditor() {
 		return (
@@ -40,6 +49,7 @@ class NotesGrid extends PureComponent
 	}
 
 	handleAddNote() {
+		console.log
 		this.setState({isAddNote: !this.state.isAddNote});
 	}
 	render() {
@@ -47,7 +57,6 @@ class NotesGrid extends PureComponent
 			<div>
 				<h1>Notes grid</h1>
 				{this.state.notes.map( (note, ind) => {
-					console.log("map-note:", note)
 					return(
 					<NoteEditor 
 						key={ind}

@@ -26,7 +26,7 @@ class NoteEditor extends PureComponent
 			title: props.title || undefined,
 			text: props.text || undefined,
 			color: props.color || '#FFFFFF',
-			isChanged: (props.title && props.text) ? false : true
+			isChanged: (props.title || props.text) ? false : true
 		}
 	}
 
@@ -49,11 +49,9 @@ class NoteEditor extends PureComponent
 		 })
 	}
 	handleCancle() {
-		if (this.props.onCloseNewNoteEditor !== undefined && 
-			this.state.text === undefined &&
-			this.state.title === undefined) 
-		{
+		if (this.props.onCloseNewNoteEditor !== undefined) 
 			this.props.onCloseNewNoteEditor();
+		{
 		}
 		this.setState({
 			color: this.props.color || '#FFFFFF',
@@ -75,18 +73,20 @@ class NoteEditor extends PureComponent
 	}
 	handleSubmit(e) {
 		this.setState({ isChanged: false })
-		this.props.onNoteAdd({
-			title: this.state.title,
-			color: this.state.color,
-			text: this.state.text
-		})
 		if (this.props.onCloseNewNoteEditor !== undefined) {
+			
+			this.props.onNoteAdd({
+				title: this.state.title,
+				color: this.state.color,
+				text: this.state.text
+			})
 			this.props.onCloseNewNoteEditor();
+		} else {
+			this.props.onNoteEdit()
 		}
-		// alert("Saving... title: " + this.state.title + " & text: " + this.state.text )
 	}
 	render() {
-		
+		console.log("render note:", this.state.id)
     	const colorPicker = this.state.displayColorPicker
 		? (<div style={ Styles.popover }>
           		<div style={ Styles.cover } onClick={ this.handleClosePicker.bind(this) }/>
@@ -105,7 +105,7 @@ class NoteEditor extends PureComponent
 					<IconButton 
 						label="Save" 
 						style={ Styles.buttonStile } 
-						disabled={this.state.text  === this.props.text && this.state.title === this.props.title}
+						disabled={!this.state.isChanged}
 						onClick={this.handleSubmit.bind(this)}>
 						<ContentCheck />
 					</IconButton>

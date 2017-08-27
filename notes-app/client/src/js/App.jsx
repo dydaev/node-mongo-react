@@ -6,8 +6,6 @@ import NoteStore from './stores/noteStore.js';
 import NotesActions from './actions/NoteActions.js';
 
 import NotesGrid from './conteiners/notesGrid'
-import TextField from './components/text-field.jsx'
-
 
 function getStateFromFlux() {
 	return {
@@ -50,14 +48,12 @@ const App = ReactCreateClass({
     },
 
 	render() {
-		console.log("app:", this.state.notes)
 		return(
 				<MuiThemeProvider>
 					<section>
 							<h1>Notes</h1>
 							
 							<article id="notes">
-								<TextField notes={this.state.notes} />
 								<NotesGrid 
 									notes={this.state.notes}
 									onNoteAdd={this.handleNoteAdd}
