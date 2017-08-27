@@ -15,11 +15,11 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import ColorPNG from 'material-ui/svg-icons/image/brush';
 // import ColorPNG from 'material-ui/svg-icons/image/color-lens';
 
+import Styles from './styles.js';
 class NoteEditor extends PureComponent
 {
 	constructor(props) {
 		super(props);
-		console.log("note-", this)
 		this.state = {
 			id: props.id,
 			displayColorPicker: false,
@@ -49,6 +49,12 @@ class NoteEditor extends PureComponent
 		 })
 	}
 	handleCancle() {
+		if (this.props.onCloseNewNoteEditor !== undefined && 
+			this.state.text === undefined &&
+			this.state.title === undefined) 
+		{
+			this.props.onCloseNewNoteEditor();
+		}
 		this.setState({
 			color: this.props.color || '#FFFFFF',
 			text: this.props.text || undefined,
@@ -57,6 +63,11 @@ class NoteEditor extends PureComponent
 		})
 	}
 	handleDeleteNote(e) {
+		if (this.props.onCloseNewNoteEditor !== undefined && 
+			this.state.text === undefined &&
+			this.state.title === undefined) {
+			this.props.onCloseNewNoteEditor();
+		}
 		this.props.onNoteDelete(this.props.id)
 	}
 	handleChanging() {
@@ -75,36 +86,10 @@ class NoteEditor extends PureComponent
 		// alert("Saving... title: " + this.state.title + " & text: " + this.state.text )
 	}
 	render() {
-		const buttonStile = {
-			width: 40,
-    		height: 40,
-			marginRight: 10,
-		}
-		const textItemStyle = {
-			width: 200,
-			color: "#ff4444"
-		}
-		const stylePaper = {
-		 	height: 230,
-			width: 240,
-			margin: 20,
-			textAlign: 'center',
-			display: 'inline-block'
-		}
-		const popover = {
-	      position: 'absolute',
-	      zIndex: '2',
-	    }
-	    const cover = {
-	      position: 'fixed',
-	      top: '0px',
-	      right: '0px',
-	      bottom: '0px',
-	      left: '0px',
-	    }
+		
     	const colorPicker = this.state.displayColorPicker
-		? (<div style={ popover }>
-          		<div style={ cover } onClick={ this.handleClosePicker.bind(this) }/>
+		? (<div style={ Styles.popover }>
+          		<div style={ Styles.cover } onClick={ this.handleClosePicker.bind(this) }/>
           		<ChromePicker  onChange={this.handleChangeColor.bind(this)} color={this.state.color} />
         	</div>)
 		: null
@@ -112,14 +97,14 @@ class NoteEditor extends PureComponent
 	    		<div>
 		    		<IconButton 
 		    			label="Color" 
-		    			style={ buttonStile } 
+		    			style={ Styles.buttonStile } 
 		    			onClick={ this.handleClickPicker.bind(this) }>
 						<ColorPNG />
 				    </IconButton>
 			        { colorPicker }
 					<IconButton 
 						label="Save" 
-						style={ buttonStile } 
+						style={ Styles.buttonStile } 
 						disabled={this.state.text  === this.props.text && this.state.title === this.props.title}
 						onClick={this.handleSubmit.bind(this)}>
 						<ContentCheck />
@@ -154,7 +139,7 @@ class NoteEditor extends PureComponent
 
 		return (
 			<Paper 
-				style={ Object.assign({backgroundColor:this.state.color}, stylePaper )}
+				style={ Object.assign({backgroundColor:this.state.color}, Styles.stylePaper )}
 				zDepth={2} 
 				rounded={false} 
 			>	
@@ -162,7 +147,7 @@ class NoteEditor extends PureComponent
 					id="title"
 					disabled={this.state.isChanged ? false : true}
 					onChange={this.handleCahgeTextField.bind(this)}
-					style={textItemStyle}
+					style={Styles.textItemStyle}
 	      			hintText="Title"
 	      			value={this.state.title}
 	    		/>
@@ -170,7 +155,7 @@ class NoteEditor extends PureComponent
 					id="text"
 					disabled={this.state.isChanged ? false : true}
 					onChange={this.handleCahgeTextField.bind(this)}
-					style={textItemStyle}
+					style={Styles.textItemStyle}
 			     	hintText="Text"
 			     	multiLine={true}
 			     	rows={4}

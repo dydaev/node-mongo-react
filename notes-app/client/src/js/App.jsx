@@ -5,8 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NoteStore from './stores/noteStore.js';
 import NotesActions from './actions/NoteActions.js';
 
-import NoteEditor from './components/notes-editor.jsx'
-import NotesGrid from './components/notes-grid.jsx'
+import NotesGrid from './conteiners/notesGrid'
+import TextField from './components/text-field.jsx'
 
 
 function getStateFromFlux() {
@@ -38,13 +38,11 @@ const App = ReactCreateClass({
 	},
 
 	handleNoteDelete( id ) {
-		console.log("deleting note id: ", id)
-
 		NotesActions.deleteNote(id);
 	},
 
-	hamdleNoteEdit (data) {
-
+	handleNoteEdit (data) {
+		console.log("Re-write note: ", data)
 	},
 
 	_onChange() {
@@ -52,16 +50,19 @@ const App = ReactCreateClass({
     },
 
 	render() {
+		console.log("app:", this.state.notes)
 		return(
 				<MuiThemeProvider>
 					<section>
 							<h1>Notes</h1>
+							
 							<article id="notes">
-								<NotesGrid
-									notes={this.state.notes}  
+								<TextField notes={this.state.notes} />
+								<NotesGrid 
+									notes={this.state.notes}
 									onNoteAdd={this.handleNoteAdd}
-									onNoteEdit={this.hamdleNoteEdit}
-									onNoteDelete={this.handleNoteDelete} 
+									onNoteEdit={this.handleNoteEdit}
+									onNoteDelete={this.handleNoteDelete}
 								/>
 							</article>
 					</section>
