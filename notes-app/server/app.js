@@ -25,6 +25,12 @@ app.post('/notes', (req, res) => {
 			.then( data => res.send(data))
 });
 
+app.post('/notes/update', (req, res) => {
+	console.log("app-", req.body)
+	db.updateNote(req.body)
+			.then( data => res.send(data))
+});
+
 app.delete('/notes/:id', (req, res) => {
 	db.deleteNote(req.params.id)
 			.then( data => res.send(data))

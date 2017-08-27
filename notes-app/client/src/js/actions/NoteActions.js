@@ -30,6 +30,15 @@ const NoteActions = {
 					console.log("Failed create note:", err);
 				});
 	},
+	updateNote: function(note) {
+		api.updateNote(note)
+			.then(() => {
+				this.loadNotes();
+			})
+			.catch(err => {
+						console.log("Fail update note", err);
+					});
+	},
 	deleteNote: function(noteId) {
 		api.deleteNote(noteId)
 				.then(() => {

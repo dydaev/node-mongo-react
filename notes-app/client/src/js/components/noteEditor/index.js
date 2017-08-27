@@ -26,6 +26,7 @@ class NoteEditor extends PureComponent
 			title: props.title || undefined,
 			text: props.text || undefined,
 			color: props.color || '#FFFFFF',
+			createData: props.createAt,
 			isChanged: (props.title || props.text) ? false : true
 		}
 	}
@@ -82,7 +83,13 @@ class NoteEditor extends PureComponent
 			})
 			this.props.onCloseNewNoteEditor();
 		} else {
-			this.props.onNoteEdit()
+			this.props.onNoteEdit({
+				id: this.state.id,
+				title: this.state.title,
+				color: this.state.color,
+				text: this.state.text,
+				createAt: this.state.createData
+			})
 		}
 	}
 	render() {

@@ -41,6 +41,7 @@ const App = ReactCreateClass({
 
 	handleNoteEdit (data) {
 		console.log("Re-write note: ", data)
+		NotesActions.updateNote(data);
 	},
 
 	_onChange() {

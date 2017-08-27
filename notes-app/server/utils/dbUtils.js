@@ -21,6 +21,13 @@ export function createNote(data) {
 		})
 		return note.save();
 }
+export function updateNote(data) { 
+		return Note.findOneAndUpdate({_id: data.id}, {
+				title: data.title,
+				text: data.text,
+				color: data.color
+		});
+}
 export function deleteNote(id) { 
 		return Note.findById(id).remove();
 }
