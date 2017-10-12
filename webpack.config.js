@@ -1,11 +1,11 @@
 module.exports = {
     // simple config from http://webpack.github.io/docs/configuration.html
     entry: [
-                "./src/js/main.js",
-                "./src/styles/main.sass"
+                "./client/src/js/main.js",
+                "./client/src/styles/main.sass"
             ],
     output: { 
-			path: __dirname + "/public/js", 
+			path: __dirname + "/server/public/js", 
 			filename: "bundle.js" 
 	},
 

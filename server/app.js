@@ -9,15 +9,24 @@ db.setUpConnection();
 
 const app = express();
 const port = require('../etc/config.json').serverPort;
+var path = require('path');
 
 app.use( bodyParser.json() );
 
 // Allow requests from any origin
 app.use(cors({ origin: '*' }));
 
+app.set('view engine', 'ejs');
+//app.set(express.static(path.join(__dirname, 'pablic')));
+app.use(express.static('/public'));
+console.log(__dirname + '/public' );
 app.get('/notes', (req, res) => {
 	db.listNotes()
-			.then( data => res.send(data))
+		.then( data => res.send(data))
+});
+
+app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.post('/notes', (req, res) => {
