@@ -18,8 +18,9 @@ app.use(cors({ origin: '*' }));
 
 app.set('view engine', 'ejs');
 //app.set(express.static(path.join(__dirname, 'pablic')));
-app.use(express.static('/public'));
-console.log(__dirname + '/public' );
+//app.use(express.static('/public'));
+app.use("/public", express.static(path.join(__dirname, 'public')));
+//console.log(__dirname + '/public' );
 app.get('/notes', (req, res) => {
 	db.listNotes()
 		.then( data => res.send(data))
