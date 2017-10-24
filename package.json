@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "npm install express",
+    "preinstall": [
+		"npm install express",
+		"webpack webpack.config.js"
+		],
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
     "build": "babel lib -d dist"
   },
