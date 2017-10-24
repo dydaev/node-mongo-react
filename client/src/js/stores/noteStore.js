@@ -15,7 +15,8 @@ function formatNote(note) {
 		title: note.title,
 		text: note.text,
 		color: note.color || '#FFFFFF',
-		createdAt: note.createdAt
+		createAt: note.createAt,
+		sortKey: note.sortKey
 	};
 }
 const TaskStore = Object.assign({}, EventEmitter.prototype, {

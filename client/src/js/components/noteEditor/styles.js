@@ -11,13 +11,22 @@ const Styles = {
 	stylePaper: {
 	 	height: 230,
 		width: 240,
-		margin: 20,
+		margin: 10,
+		padding: 6,
 		textAlign: 'center',
 		display: 'inline-block'
 	},
 	popover: {
-	  position: 'absolute',
-	  zIndex: '2',
+		paddingTop: 75,
+		paddingLeft: 6,
+	    width: 218,
+	    height: 93,
+	    position: 'releativ',
+	    margin: 'auto'
+	},
+	picker: {
+		width: 210,
+		margin: 'auto'
 	},
 	cover: {
 	  position: 'fixed',

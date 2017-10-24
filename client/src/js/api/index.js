@@ -12,6 +12,9 @@ export default {
 	updateNote(data, id) {
 		return axios.post(`${apiPrefix}/notes/update`, data)
 	},
+	updateNoteSortKey(data) {
+		return axios.post(`${apiPrefix}/notes/updatesortkey`, data)
+	},
 	deleteNote(idNote) {
 		return axios.delete(`${apiPrefix}/notes/${idNote}`);
 	}

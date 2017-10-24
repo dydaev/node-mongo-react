@@ -39,6 +39,15 @@ const NoteActions = {
 						console.log("Fail update note", err);
 					});
 	},
+	updateNoteSortKey: function(data) {
+		api.updateNoteSortKey(data)
+			.then(() => {
+				this.loadNotes();
+			})
+			.catch(err => {
+						console.log("Fail update note sortKey", err);
+					});
+	},
 	deleteNote: function(noteId) {
 		api.deleteNote(noteId)
 				.then(() => {

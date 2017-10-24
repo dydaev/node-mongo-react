@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NoteStore from './stores/noteStore.js';
 import NotesActions from './actions/NoteActions.js';
 
-import NotesGrid from './conteiners/notesGrid'
+import NotesGrid from './conteiners/notesGrid/index.jsx'
 
 function getStateFromFlux() {
 	return {
@@ -44,6 +44,12 @@ const App = ReactCreateClass({
 		NotesActions.updateNote(data);
 	},
 
+	handleUpdateNoteSortKey (id, sortKey) {
+		console.log(`update note ${id} sortKey: `, sortKey)
+		NotesActions.updateNoteSortKey({ id: id, sortKey: sortKey});
+		return sortKey;
+	},
+
 	_onChange() {
         this.setState(getStateFromFlux());
     },
@@ -52,14 +58,13 @@ const App = ReactCreateClass({
 		return(
 				<MuiThemeProvider>
 					<section>
-							<h1>Notes</h1>
-							
 							<article id="notes">
 								<NotesGrid 
 									notes={this.state.notes}
 									onNoteAdd={this.handleNoteAdd}
 									onNoteEdit={this.handleNoteEdit}
 									onNoteDelete={this.handleNoteDelete}
+									onUpdateSortKey={this.handleUpdateNoteSortKey}
 								/>
 							</article>
 					</section>
