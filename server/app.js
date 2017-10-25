@@ -1,14 +1,14 @@
 //base server script
 
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import * as db from './utils/dbUtils';
+var express = require('express');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+var db = require('./utils/dbUtils');
 
 db.setUpConnection();
 
-const app = express();
-const port = require('../etc/config.json').serverPort;
+var app = express();
+var port = require('../etc/config.json').serverPort;
 var path = require('path');
 
 app.use( bodyParser.json() );

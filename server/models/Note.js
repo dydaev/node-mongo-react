@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const NoteSchema = new Schema({
+var NoteSchema = new Schema({
 	title: {type: String},
 	text: {type: String, required: true},
 	color: {type: String},
@@ -10,4 +10,4 @@ const NoteSchema = new Schema({
 	sortKey: {type: Number}
 })
 
-const Note = mongoose.model('Note', NoteSchema);
+var Note = mongoose.model('Note', NoteSchema);

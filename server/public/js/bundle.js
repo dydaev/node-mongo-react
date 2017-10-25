@@ -36025,7 +36025,7 @@ module.exports = function spread(callback) {
 /* 457 */
 /***/ (function(module, exports) {
 
-module.exports = {"apiPrefix":"http://localhost:3040","serverPort":"3040","db":{"name":"notes","host":"localhost","port":"27017"}}
+module.exports = {"apiPrefix":"http://localhost:3040","serverPort":"80","db":{"name":"notes","host":"localhost","port":"27017"}}
 
 /***/ }),
 /* 458 */
